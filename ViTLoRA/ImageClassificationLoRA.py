@@ -53,8 +53,9 @@ def train_lora(model, num_epochs, train_dataloader, val_dataloader , optimizer, 
             if acc > prev_acc:
                 prev_acc = acc
                 print("save state to ...")
-                checkpoint = accelerator.get_state_dict(model)
-                torch.save(checkpoint, f"{result_dir}/model_best.pt")
+                # checkpoint = accelerator.get_state_dict(model)
+                # torch.save(checkpoint, f"{result_dir}/model_best.pt")
+                model.save_pretrained(result_dir)
 
 def val_lora(model, val_dataloader):
     local_rank = int(os.environ["LOCAL_RANK"])
